@@ -13,22 +13,22 @@ export default class loading extends Component {
 
     constructor(props) {
         super(props);
-        
+
     }
 
-    componentDidMount(){
+    componentDidMount() {
         const { navigate } = this.props.navigation;
-        setTimeout(()=>{
+        setTimeout(() => {
             navigate('input');
-        },500)
+        }, 500)
     }
-    
+
 
     render() {
         return (
             <View style={styles.container}>
-            <StatusBar hidden={true}/>
-                <Image style={styles.img} source={ logo } />
+                <StatusBar hidden={true} />
+                <Image style={styles.img} source={logo} />
             </View>
         )
     }
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(128,130,133)',
         alignItems: 'center',
-        justifyContent: 'center'
+        paddingTop: '45%'
     },
     img: {
         height: 135,

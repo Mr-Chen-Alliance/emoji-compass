@@ -18,26 +18,18 @@ export default class input extends Component {
     render() {
         return (
             <View style={styles.container}>
+                {!this.state.emoji &&
+                    <View style={styles.circle}>
+                        <Text style={styles.text}>Choose an emoji as the needle</Text>
+                    </View>}
 
-                <View style={styles.circle}>
-                    {/* <TextInput style={{
-                        height: 40,
-                        borderColor: 'gray',
-                        borderWidth: 1
-                    }}
-                        onChangeText={(emoji) => this.setState({ emoji })} value={this.state.emoji} /> */}
-                    <Text>
+                {this.state.emoji &&
+                    <Text style={styles.emoji}>
                         {this.state.emoji}
-                    </Text>
-
-                </View>
-                <View style={styles.instruction}>
-                    <Text style={styles.text}>Touch the circle area above to choose your
-                            own emoji and navigate your location</Text>
-                </View>
+                    </Text>}
                 <EmojiInput
-                    onEmojiSelected={emoji =>
-                        this.setState({ emoji })} />
+                    onEmojiSelected={e =>
+                        this.setState({ emoji: e.char })} />
 
             </View >
         )
@@ -49,28 +41,30 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgb(147,149,152)',
         alignItems: 'center',
-        // justifyContent: 'center'
     },
     circle: {
-        marginTop: '35%',
+        marginTop: '10%',
+        marginBottom: '5%',
         width: '55%',
         height: '30%',
-        borderRadius: 500,
+        borderRadius: 1000,
         borderWidth: 1,
         backgroundColor: 'rgba(0,0,0,0.1)',
         alignItems: 'center'
     },
-    instruction: {
-        marginTop: '30%',
-        width: '90%',
-        height: 100
+    emoji: {
+        marginTop: '10%',
+        marginBottom: '0.5%',
+        width: '55%',
+        height: '30%',
+        textAlign: 'center',
+        fontSize: 180
     },
     text: {
-        marginTop: '8%',
+        marginTop: '40%',
         textAlign: 'center',
-        height: 50,
-        width: '100%',
-        fontSize: 17,
+        width: '95%',
+        fontSize: 20,
         color: 'white'
     }
 })
