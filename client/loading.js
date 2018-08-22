@@ -20,7 +20,7 @@ export default class loading extends Component {
         const { navigate } = this.props.navigation;
         setTimeout(()=>{
             navigate('input');
-        },2000)
+        },500)
     }
     
 

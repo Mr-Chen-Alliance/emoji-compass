@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
+import { StyleSheet, View, Text, StatusBar, Image, TextInput } from 'react-native';
 import { Font } from 'expo';
 
 
@@ -11,14 +11,22 @@ export default class input extends Component {
 
     constructor(props) {
         super(props);
-        
+        this.state = { emoji:'' };
     }
     
 
     render() {
         return (
             <View style={styles.container}>
-                <Text>Hello World!</Text>
+
+                    <View style={styles.circle}>
+                        <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}} onChangeText={(emoji)=> this.setState({emoji})} value={this.state.emoji}/>
+                    </View>
+                    <View style={styles.instruction}>
+                        <Text style={styles.text}>Touch the circle area above to choose your 
+                            own emoji and navigate your location</Text>
+                    </View>
+
             </View>
         )
     }
@@ -27,8 +35,30 @@ export default class input extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(128,130,133)',
+        backgroundColor: 'rgb(147,149,152)',
         alignItems: 'center',
-        justifyContent: 'center'
+        // justifyContent: 'center'
+    },
+    circle: {
+        marginTop: '35%',
+        width: '55%',
+        height: '30%',
+        borderRadius: 100,
+        borderWidth: 1, 
+        backgroundColor: 'rgba(0,0,0,0.1)',
+        alignItems: 'center'
+    },
+    instruction: {
+        marginTop: '30%',
+        width: '90%',
+        height: 100
+    },
+    text: {
+        marginTop: '8%',
+        textAlign: 'center',
+        height: 50,
+        width:'100%',
+        fontSize: 17,
+        color: 'white'
     }
 })
