@@ -38,7 +38,6 @@ export default class input extends Component {
                 <EmojiInput
                     onEmojiSelected={emoji =>
                         this.setState({ emoji: emoji.char })
-                        // console.log('********', emoji.char)
                     } />
 
             </View >
