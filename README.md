@@ -1,4 +1,4 @@
-# emoji-compass
+# <img src='./public/img/logo.png'/>
 A simple react-native compass app
 
 ## Interface Sample
