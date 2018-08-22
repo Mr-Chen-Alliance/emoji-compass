@@ -1,4 +1,4 @@
-# <img src='./public/img/logo.png' height="5%"/>
+# <img src='./public/img/logo.png'/>
 A simple react-native compass app
 
 ## Interface Sample
