@@ -19,7 +19,7 @@ export default class loading extends Component {
     componentDidMount() {
         const { navigate } = this.props.navigation;
         setTimeout(() => {
-            navigate('input');
+            navigate('Input');
         }, 500)
     }
 

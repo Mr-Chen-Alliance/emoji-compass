@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, StatusBar, Image, TextInput } from 'react-native';
-import { Font } from 'expo';
+import { StyleSheet, View, Text } from 'react-native';
 import EmojiInput from 'react-native-emoji-input';
 
 export default class input extends Component {
@@ -14,17 +13,21 @@ export default class input extends Component {
         this.state = { emoji: '' };
     }
 
-
     render() {
         return (
             <View style={styles.container}>
                 {!this.state.emoji &&
                     <View style={styles.circle}>
-                        <Text style={styles.text}>Choose an emoji as the needle</Text>
+                        <Text style={styles.text}>Choose an emoji and press here to confirm</Text>
                     </View>}
 
                 {this.state.emoji &&
-                    <Text style={styles.emoji}>
+                    <Text
+                        style={styles.emoji}
+                        onPress={() => {
+                            const { navigate } = this.props.navigation;
+                            navigate('Compass', { emoji: this.state.emoji });
+                        }}>
                         {this.state.emoji}
                     </Text>}
                 <EmojiInput
