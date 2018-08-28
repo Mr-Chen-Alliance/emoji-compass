@@ -1,79 +1,6 @@
-// import React, { Component } from 'react';
-// import { StyleSheet, View, Text } from 'react-native';
-
-// export default class compass extends Component {
-
-//     static navigationOptions = {
-//         header: null
-//     }
-
-//     constructor(props) {
-//         super(props);
-//     }
-
-//     render() {
-//         const emoji = this.props.navigation.state.params.emoji
-//         return (
-//             <View style={styles.container}>
-//                 <View style={styles.pointer}>
-//                     {/* <Text style={styles.s}>S</Text>
-//                     <Text style={styles.w}>W</Text> */}
-//                     <Text style={styles.emoji}>{emoji}</Text>
-//                     {/* <Text style={styles.e}>E</Text>
-//                     <Text style={styles.n}>N</Text> */}
-//                 </View>
-//             </View >
-//         )
-//     }
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: 'rgb(147,149,152)',
-//         alignItems: 'center',
-//         justifyContent: 'center'
-//     },
-//     pointer: {
-//         height: '40%',
-//         width: '70%',        
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         // backgroundColor: 'red'
-//     },
-//     emoji: {
-//         height: '60%',
-//         width: '60%',
-//         fontSize: 160,
-//         // backgroundColor: 'white'
-//     },
-//     s: {
-//         height: '10%',
-//         width: '10%',
-//         // backgroundColor: 'yellow'
-//     },
-//     w: {
-//         height: '10%',
-//         width: '10%',
-//         // backgroundColor: 'yellow'
-//     },
-//     e: {
-//         height: '10%',
-//         width: '10%',
-//         // backgroundColor: 'yellow'
-//     },
-//     n: {
-//         height: '10%',
-//         width: '10%',
-//         // backgroundColor: 'yellow'
-//     },
-// })
-
-
-
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Animated, Easing, Dimensions } from 'react-native';
-import { Constants, Location, Permissions } from 'expo';
+import { Platform, Text, View, StyleSheet, Animated, Easing } from 'react-native';
+import { Constants, Permissions } from 'expo';
 
 export default class compass extends Component {
 
@@ -85,7 +12,6 @@ export default class compass extends Component {
         super(props);
         this.spinValue = new Animated.Value(0);
         this.state = {
-            // location: null,
             errorMessage: null,
             heading: null
         };
