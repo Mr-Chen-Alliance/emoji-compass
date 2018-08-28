@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, StatusBar, Image } from 'react-native';
 import { Font } from 'expo';
-import { input } from './input';
 import logo from '../public/img/logo.png';
 
 
