@@ -12,20 +12,30 @@ export default class loading extends Component {
 
     constructor(props) {
         super(props);
-
+        this.state = {
+            backgroundColor: {}
+        }
     }
 
     componentDidMount() {
         const { navigate } = this.props.navigation;
+        let hr = new Date().getHours();
+        if(hr<6 || hr>18){
+            this.setState({backgroundColor:{backgroundColor: 'rgb(51,0,102)'}})
+        }else{
+            this.setState({backgroundColor:{backgroundColor: 'rgb(128,130,133)'}})
+        }
+
         setTimeout(() => {
-            navigate('Input');
-        }, 500)
+            navigate('Input', {backgroundColor: this.state.backgroundColor});
+        }, 8500)
     }
 
 
     render() {
+        console.log('***************', this.state.backgroundColor)
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.state.backgroundColor]}>
                 <StatusBar hidden={true} />
                 <Image style={styles.img} source={logo} />
             </View>
@@ -36,7 +46,6 @@ export default class loading extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(128,130,133)',
         alignItems: 'center',
         paddingTop: '45%'
     },

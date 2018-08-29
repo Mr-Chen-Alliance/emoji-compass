@@ -92,15 +92,15 @@ export default class compass extends Component {
             text %= 360
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
                 <Animated.Text
                     style={{
+                        height: 250, width: 250, 
                         transform: [{ rotate: spin }],
-                        fontSize: 200,
+                        fontSize: 200, textAlign: 'center'
                     }} >
                     <Text style={{
-                        fontSize: 30,
-                        textAlign: 'center'
+                        fontSize: 30
                     }}>N{"\n"}</Text>
                     {emoji}
                 </Animated.Text>
@@ -116,6 +116,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#ecf0f1',
+        // backgroundColor: 'rgb(147,149,152)',
     }
 });

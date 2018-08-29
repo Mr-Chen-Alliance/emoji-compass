@@ -15,7 +15,7 @@ export default class input extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
                 {!this.state.emoji &&
                     <View style={styles.circle}>
                         <Text style={styles.text}>Choose an emoji and press here to confirm</Text>
@@ -26,7 +26,7 @@ export default class input extends Component {
                         style={styles.emoji}
                         onPress={() => {
                             const { navigate } = this.props.navigation;
-                            navigate('Compass', { emoji: this.state.emoji });
+                            navigate('Compass', { emoji: this.state.emoji, backgroundColor: this.props.navigation.state.params.backgroundColor});
                         }}>
                         {this.state.emoji}
                     </Text>}
@@ -42,7 +42,6 @@ export default class input extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'rgb(147,149,152)',
         alignItems: 'center',
     },
     circle: {
