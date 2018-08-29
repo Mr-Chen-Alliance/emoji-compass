@@ -38,10 +38,10 @@ export default class compass extends Component {
         let rot = +start;
         let rotM = rot % 360;
 
-        if (rotM < 180 && (heading > (rotM + 180)))
-            rot -= 360;
-        if (rotM >= 180 && (heading <= (rotM - 180)))
-            rot += 360
+        // if (rotM < 180 && (heading > (rotM + 180)))
+        //     rot -= 360;
+        // if (rotM >= 180 && (heading <= (rotM - 180)))
+        //     rot += 360
 
         rot += (heading - rotM)
 
@@ -89,18 +89,20 @@ export default class compass extends Component {
         if (text < 0)
             text += 360
         if (text > 360)
-            text -= 360
+            text %= 360
 
         return (
             <View style={styles.container}>
-                <Text style={styles.text}>{text + '°'}</Text>
+
                 <Animated.Text
                     style={{
                         transform: [{ rotate: spin }],
-                        fontSize: 160
+                        fontSize: 200
                     }} >
+                    <Text style={{fontSize: 40}}>W</Text>
                     {emoji}
                 </Animated.Text>
+                <Text style={styles.text}>{text + '°'}</Text>
             </View>
         );
     }
