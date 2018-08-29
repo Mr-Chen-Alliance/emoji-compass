@@ -93,13 +93,15 @@ export default class compass extends Component {
 
         return (
             <View style={styles.container}>
-
                 <Animated.Text
                     style={{
                         transform: [{ rotate: spin }],
-                        fontSize: 200
+                        fontSize: 200,
                     }} >
-                    <Text style={{fontSize: 40}}>W</Text>
+                    <Text style={{
+                        fontSize: 30,
+                        textAlign: 'center'
+                    }}>N{"\n"}</Text>
                     {emoji}
                 </Animated.Text>
                 <Text style={styles.text}>{text + '°'}</Text>
@@ -115,10 +117,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
         backgroundColor: '#ecf0f1',
-    },
-    paragraph: {
-        margin: 24,
-        fontSize: 18,
-        textAlign: 'center',
     }
 });
