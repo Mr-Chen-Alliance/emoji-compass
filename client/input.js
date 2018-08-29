@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         width: '55%',
         height: '30%',
         textAlign: 'center',
-        fontSize: 180
+        fontSize: 200
     },
     text: {
         marginTop: '40%',

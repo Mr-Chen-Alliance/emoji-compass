@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Animated, Easing } from 'react-native';
+import { Platform, Text, View, StyleSheet, Animated, Easing, Image } from 'react-native';
 import { Constants, Permissions } from 'expo';
 
 export default class compass extends Component {
@@ -95,8 +95,8 @@ export default class compass extends Component {
             <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
                 <Animated.Text
                     style={{
-                        height: 250, width: 250, 
-                        transform: [{ rotate: spin }],
+                        height: '50%', width: '50%', 
+                        transform: [{ rotate: spin }], color: '#E6E7E8',
                         fontSize: 200, textAlign: 'center'
                     }} >
                     <Text style={{
@@ -104,7 +104,10 @@ export default class compass extends Component {
                     }}>N{"\n"}</Text>
                     {emoji}
                 </Animated.Text>
-                <Text style={styles.text}>{text + '°'}</Text>
+                <View style={{ flexDirection: 'row', width: '100%', top: '20%'}}>
+                    <Text style={styles.text}>{text + '°'}</Text>
+                    <Image style={{top: '8%', justifyContent: 'flex-end'}} source={require('../public/img/back1.png')}/>
+                </View>
             </View>
         );
     }
@@ -115,7 +118,13 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        // backgroundColor: 'rgb(147,149,152)',
+        paddingTop: Constants.statusBarHeight
+    },
+    text: {
+        marginLeft: '3%',
+        width: '60%',
+        fontSize: 110, 
+        // backgroundColor: 'yellow',
+        color: '#E6E7E8'
     }
 });

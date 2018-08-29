@@ -28,12 +28,11 @@ export default class loading extends Component {
 
         setTimeout(() => {
             navigate('Input', {backgroundColor: this.state.backgroundColor});
-        }, 8500)
+        }, 2000)
     }
 
 
     render() {
-        console.log('***************', this.state.backgroundColor)
         return (
             <View style={[styles.container, this.state.backgroundColor]}>
                 <StatusBar hidden={true} />
@@ -50,6 +49,7 @@ const styles = StyleSheet.create({
         paddingTop: '45%'
     },
     img: {
+        top: '15%',
         height: 135,
         width: 220
     }
