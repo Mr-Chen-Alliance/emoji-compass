@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Animated, Easing, Image } from 'react-native';
-import { Constants, Permissions } from 'expo';
+import { Platform, Text, View, StyleSheet, Animated, Easing, Image, TouchableOpacity } from 'react-native';
+import { Constants, Permissions, Font } from 'expo';
 
 export default class compass extends Component {
 
@@ -13,7 +13,9 @@ export default class compass extends Component {
         this.spinValue = new Animated.Value(0);
         this.state = {
             errorMessage: null,
-            heading: null
+            heading: null,
+            isBoldItalicLoaded: false,
+            isItalicLoaded: false
         };
     }
 
@@ -27,8 +29,23 @@ export default class compass extends Component {
         }
     }
 
+    componentDidMount() {
+        Font.loadAsync({'AvenirNextBoldItalic': require('../public/fonts/AvenirNextBoldItalic.ttf')})
+        .then(()=>{
+            this.setState({isBoldItalicLoaded: true})
+        })
+        Font.loadAsync({'AvenirNextItalic': require('../public/fonts/AvenirNextItalic.ttf')})
+        .then(()=>{
+            this.setState({isItalicLoaded: true})
+        })
+    }
+
     componentWillUpdate() {
-        this.spin()
+            this.spin()
+    }
+
+    componentWillUnmount() {
+        Expo.Location.watchHeadingAsync();
     }
 
     spin() {
@@ -37,11 +54,6 @@ export default class compass extends Component {
 
         let rot = +start;
         let rotM = rot % 360;
-
-        // if (rotM < 180 && (heading > (rotM + 180)))
-        //     rot -= 360;
-        // if (rotM >= 180 && (heading <= (rotM - 180)))
-        //     rot += 360
 
         rot += (heading - rotM)
 
@@ -73,6 +85,7 @@ export default class compass extends Component {
     render() {
         let text = 'Waiting...';
         const emoji = this.props.navigation.state.params.emoji;
+        const { isBoldItalicLoaded, isItalicLoaded } = this.state;
         if (this.state.errorMessage) {
             text = this.state.errorMessage;
         } else if (this.state.heading) {
@@ -104,9 +117,21 @@ export default class compass extends Component {
                     }}>N{"\n"}</Text>
                     {emoji}
                 </Animated.Text>
-                <View style={{ flexDirection: 'row', width: '100%', top: '20%'}}>
-                    <Text style={styles.text}>{text + '°'}</Text>
-                    <Image style={{top: '8%', justifyContent: 'flex-end'}} source={require('../public/img/back1.png')}/>
+                <View style={{ flexDirection: 'row', width: '100%', height: 120, top: '20%'}}>
+                    <View style={{flexDirection: 'row', width: '75%'}}>
+                        <Text style={[styles.text, isBoldItalicLoaded && {fontFamily: 'AvenirNextBoldItalic'}]}>{text + '°'}</Text>
+                        <Text style={[isItalicLoaded && { top: '24%', marginLeft: '-14%', fontFamily: 'AvenirNextItalic', fontSize: 40, color: '#E6E7E8'}]}>
+                            {text>=339||text<=22?'N':text>=23&&text<=68?'NE':text>=69&&text<=112?'E':text>=113&&text<=158?'SE':text>=159&&text<=202?'S':text>=203&&text<=248?'SW':text>=249&&text<=292?'W':'NW'}
+                        </Text>
+                    </View> 
+                    <TouchableOpacity 
+                        onPress={()=>{
+                            const { navigate } = this.props.navigation;
+                            navigate('Input')
+                            }} 
+                        style={{top: '8%', height: 80}}>
+                        <Image source={require('../public/img/back1.png')}/>
+                    </TouchableOpacity>                
                 </View>
             </View>
         );
@@ -122,9 +147,7 @@ const styles = StyleSheet.create({
     },
     text: {
         marginLeft: '3%',
-        width: '60%',
         fontSize: 110, 
-        // backgroundColor: 'yellow',
         color: '#E6E7E8'
     }
 });
