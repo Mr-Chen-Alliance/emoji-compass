@@ -119,7 +119,7 @@ export default class compass extends Component {
                             fontSize: 30, color: '#E6E7E8'
                         }}>N</Text>
                     </View>
-                    <View style={{width: '100%', height: '80%', alignItems: 'center'}}><Text style={{fontSize: 200}}>{emoji}</Text></View>
+                    <View style={{width: '100%', height: '80%', alignItems: 'center'}}><Text style={{height: '100%', fontSize: 200}}>{emoji}</Text></View>
                 </Animated.View>
                 <View style={{ flexDirection: 'row', width: '100%', height: 120, top: '20%'}}>
                     <View style={{flexDirection: 'row', width: '75%'}}>
@@ -134,7 +134,7 @@ export default class compass extends Component {
                             navigate('Input')
                             }} 
                         style={{top: '8%', height: 80}}>
-                        <Image source={require('../public/img/back1.png')}/>
+                        <Image source={require('../public/img/back.png')}/>
                     </TouchableOpacity>                
                 </View>
             </View>
