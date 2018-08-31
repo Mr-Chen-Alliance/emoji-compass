@@ -106,17 +106,21 @@ export default class compass extends Component {
 
         return (
             <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
-                <Animated.Text
+                <Animated.View
                     style={{
-                        height: '50%', width: '50%', 
-                        transform: [{ rotate: spin }], color: '#E6E7E8',
-                        fontSize: 200, textAlign: 'center'
+                        flexDirection: 'column',
+                        height: '50%', width: '80%', 
+                        transform: [{ rotate: spin }], 
+                        alignItems: 'center', justifyContent: 'center'
                     }} >
-                    <Text style={{
-                        fontSize: 30
-                    }}>N{"\n"}</Text>
-                    {emoji}
-                </Animated.Text>
+                    <View style={{ height: 40, width: 40, borderRadius: 50, backgroundColor: 'rgb(239,65,54)', alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{
+                            fontWeight: 'bold',
+                            fontSize: 30, color: '#E6E7E8'
+                        }}>N</Text>
+                    </View>
+                    <View style={{width: '100%', height: '80%', alignItems: 'center'}}><Text style={{fontSize: 200}}>{emoji}</Text></View>
+                </Animated.View>
                 <View style={{ flexDirection: 'row', width: '100%', height: 120, top: '20%'}}>
                     <View style={{flexDirection: 'row', width: '75%'}}>
                         <Text style={[styles.text, isBoldItalicLoaded && {fontFamily: 'AvenirNextBoldItalic'}]}>{text + '°'}</Text>
