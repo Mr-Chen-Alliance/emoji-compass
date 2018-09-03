@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native';
+import { Font } from 'expo';
 import EmojiInput from 'react-native-emoji-input';
 
 export default class input extends Component {
@@ -12,48 +13,54 @@ export default class input extends Component {
         super(props);
         this.state = {
             pressed: false,
-            emoji: ''
+            isItalicLoaded: false,
+            emoji: '',
+            scroll: new Animated.Value(0)
         };
     }
 
+    componentDidMount(){
+        Font.loadAsync({ 'AvenirNextItalic': require('../public/fonts/AvenirNextItalic.ttf') })
+            .then(() => {
+                this.setState({ isItalicLoaded: true })
+            })
+    }
+
     render() {
-        if (!this.state.pressed)
+        const { isItalicLoaded } = this.state;
+        const { scroll } = this.state;
             return (
                 <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
-                    <View style={styles.init}>
-                        <Text
-                            style={styles.text}
+                    <TouchableOpacity
+                            style={styles.init}
                             onPress={() => {
-                                this.setState({ pressed: true })
-                            }}
-                        >Press here to{"\n"}
-                            choose an {"\n"}emoji</Text>
-                    </View>
+                                !this.state.pressed?this.setState({ pressed: true }):this.setState({ pressed: false });
+                                !this.state.pressed?
+                                    Animated.timing(scroll,{toValue: -360, duration: 500}).start():
+                                    Animated.timing(scroll,{toValue: 0, duration: 500}).start();
+                            }}>
+                        {this.state.emoji===''&&<Text style={styles.emoji}></Text>}
+                        {this.state.emoji!=''&&<Text style={styles.emoji}
+                                                     onPress={() => {
+                                                              const { navigate } = this.props.navigation;
+                                                              navigate('Compass', { emoji: this.state.emoji, backgroundColor: this.props.navigation.state.params.backgroundColor, fontColor: this.props.navigation.state.params.fontColor})
+                                                              }}>{this.state.emoji}</Text>}
+                    </TouchableOpacity>
+
+                    <Text style={[styles.text, isItalicLoaded&&{fontFamily: 'AvenirNextItalic'}, this.props.navigation.state.params.fontColor]}>
+                            Touch the circle area above to choose{"\n"}your favorite emoji
+                    </Text>
+                    
+                    <Animated.View style={{
+                        position: 'absolute',
+                        transform: [{translateY: scroll}], height: '55%', width: '100%', top: '100%'
+                    }}>
+                        <EmojiInput
+                            onEmojiSelected={e =>
+                                this.setState({ emoji: e.char })} />
+                    </Animated.View>
+
                 </View >)
-
-        else return (
-            <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
-                {!this.state.emoji &&
-                    <View style={styles.circle}>
-                        <Text style={styles.text}>Choose an emoji and press here to{"\n"} confirm</Text>
-                    </View>
-                }
-
-                {this.state.emoji &&
-                    <Text
-                        style={styles.emoji}
-                        onPress={() => {
-                            const { navigate } = this.props.navigation;
-                            navigate('Compass', { emoji: this.state.emoji, backgroundColor: this.props.navigation.state.params.backgroundColor });
-                        }}>
-                        {this.state.emoji}
-                    </Text>}
-                <EmojiInput
-                    onEmojiSelected={e =>
-                        this.setState({ emoji: e.char })} />
-
-            </View >
-        )
     }
 }
 
@@ -64,36 +71,27 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     init: {
-        width: '55%',
-        height: '30%',
+        width: '61%',
+        height: '35%',
         borderRadius: 1000,
         borderWidth: 1,
         backgroundColor: 'rgba(0,0,0,0.1)',
-        alignItems: 'center'
-    },
-    circle: {
-        marginTop: '10%',
-        marginBottom: '5%',
-        width: '55%',
-        height: '30%',
-        borderRadius: 1000,
-        borderWidth: 1,
-        backgroundColor: 'rgba(0,0,0,0.1)',
-        alignItems: 'center'
+        alignItems: 'center',
+        top: '-23%',
+        bottom: '10%'
     },
     emoji: {
-        marginTop: '10%',
-        marginBottom: '0.5%',
-        width: '55%',
-        height: '30%',
+        marginTop: '-6%',
+        marginLeft: '6%',
+        width: '100%',
+        height: 250,
         textAlign: 'center',
-        fontSize: 200
+        fontSize: 210
     },
     text: {
-        marginTop: '35%',
+        top: '5%',
         textAlign: 'center',
         width: '95%',
-        fontSize: 20,
-        color: 'white'
+        fontSize: 20
     }
 })
