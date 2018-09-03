@@ -39,16 +39,16 @@ export default class input extends Component {
                                     Animated.timing(scroll,{toValue: -360, duration: 500}).start():
                                     Animated.timing(scroll,{toValue: 0, duration: 500}).start();
                             }}>
-                        {this.state.emoji===''&&<Text style={styles.emoji}></Text>}
-                        {this.state.emoji!=''&&<Text style={styles.emoji}
+                            
+                        {this.state.emoji!=''&&<Text style={[styles.emoji, {fontSize: 210}]}
                                                      onPress={() => {
                                                               const { navigate } = this.props.navigation;
                                                               navigate('Compass', { emoji: this.state.emoji, backgroundColor: this.props.navigation.state.params.backgroundColor, fontColor: this.props.navigation.state.params.fontColor})
                                                               }}>{this.state.emoji}</Text>}
                     </TouchableOpacity>
 
-                    <Text style={[styles.text, isItalicLoaded&&{fontFamily: 'AvenirNextItalic'}, this.props.navigation.state.params.fontColor]}>
-                            Touch the circle area above to choose{"\n"}your favorite emoji
+                    <Text style={[styles.text, isItalicLoaded && {fontFamily: 'AvenirNextItalic'}, this.props.navigation.state.params.fontColor]}>
+                            Touch the circle area above to choose{"\n"}your favorite emoji 😃
                     </Text>
                     
                     <Animated.View style={{
@@ -85,8 +85,7 @@ const styles = StyleSheet.create({
         marginLeft: '6%',
         width: '100%',
         height: 250,
-        textAlign: 'center',
-        fontSize: 210
+        textAlign: 'center'
     },
     text: {
         top: '5%',
