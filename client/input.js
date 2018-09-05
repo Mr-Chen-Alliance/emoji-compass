@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Animated } from 'react-native';
-import { Font } from 'expo';
+import { StyleSheet, View, Text, TouchableOpacity, Animated, Easing } from 'react-native';
 import EmojiInput from 'react-native-emoji-input';
+import triangleImg from '../public/img/triangle.png';
 
 export default class input extends Component {
 
@@ -15,31 +15,58 @@ export default class input extends Component {
             pressed: false,
             isItalicLoaded: false,
             emoji: '',
-            scroll: new Animated.Value(0)
+            scroll: new Animated.Value(0),
+            triangle: new Animated.Value(0)
         };
     }
 
     componentDidMount(){
-        Font.loadAsync({ 'AvenirNextItalic': require('../public/fonts/AvenirNextItalic.ttf') })
-            .then(() => {
-                this.setState({ isItalicLoaded: true })
-            })
+        this.runAnimation();
     }
 
+    componentWillUnmount(){
+        this.state.triangle.stopAnimation()
+    }
+
+    runAnimation(){
+        Animated.timing(this.state.triangle, {
+            toValue: -5,
+            duration: 1000,
+            easing: Easing.linear
+        }).start(()=>{
+            Animated.timing(this.state.triangle, {
+                toValue: 0,
+                duration: 1000,
+                easing: Easing.linear
+            }).start(()=>{
+                this.runAnimation();
+            })
+        })
+    }
+
+
     render() {
-        const { isItalicLoaded } = this.state;
-        const { scroll } = this.state;
+        const { scroll, triangle } = this.state;
             return (
-                <View style={[styles.container, this.props.navigation.state.params.backgroundColor]}>
+                <TouchableOpacity style={[styles.container, this.props.navigation.state.params.backgroundColor]} 
+                                  activeOpacity={1}
+                                  onPress={()=> {
+                                    this.setState({ pressed: false });
+                                    Animated.timing(scroll,{toValue: 0, duration: 500}).start();
+                                  }}>
+
                     <TouchableOpacity
                             style={styles.init}
                             onPress={() => {
-                                !this.state.pressed?this.setState({ pressed: true }):this.setState({ pressed: false });
-                                !this.state.pressed?
-                                    Animated.timing(scroll,{toValue: -360, duration: 500}).start():
+                                if(!this.state.pressed){
+                                    this.setState({ pressed: true });
+                                    Animated.timing(scroll,{toValue: -330, duration: 500}).start()
+                                }else{
+                                    this.setState({ pressed: false });
                                     Animated.timing(scroll,{toValue: 0, duration: 500}).start();
+                                }
                             }}>
-                            
+
                         {this.state.emoji!=''&&<Text style={[styles.emoji, {fontSize: 210}]}
                                                      onPress={() => {
                                                               const { navigate } = this.props.navigation;
@@ -47,20 +74,27 @@ export default class input extends Component {
                                                               }}>{this.state.emoji}</Text>}
                     </TouchableOpacity>
 
-                    <Text style={[styles.text, isItalicLoaded && {fontFamily: 'AvenirNextItalic'}, this.props.navigation.state.params.fontColor]}>
-                            Touch the circle area above to choose{"\n"}your favorite emoji 😃
-                    </Text>
+                    <TouchableOpacity
+                        style={styles.triangle}
+                        onPress={() => {
+                            this.setState({ pressed: true });
+                            Animated.timing(scroll,{toValue: -330, duration: 500}).start()
+                        }}
+                    >
+                        <Animated.Image style={{transform: [{translateY: triangle}]}} source={triangleImg}/>
+
+                    </TouchableOpacity>
                     
                     <Animated.View style={{
                         position: 'absolute',
-                        transform: [{translateY: scroll}], height: '55%', width: '100%', top: '100%'
+                        transform: [{translateY: scroll}], height: '50%', width: '100%', top: '100%'
                     }}>
                         <EmojiInput
                             onEmojiSelected={e =>
                                 this.setState({ emoji: e.char })} />
                     </Animated.View>
 
-                </View >)
+                </TouchableOpacity >)
     }
 }
 
@@ -77,7 +111,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: 'rgba(0,0,0,0.1)',
         alignItems: 'center',
-        top: '-23%',
+        top: '-20%',
         bottom: '10%'
     },
     emoji: {
@@ -87,10 +121,10 @@ const styles = StyleSheet.create({
         height: 250,
         textAlign: 'center'
     },
-    text: {
-        top: '5%',
-        textAlign: 'center',
-        width: '95%',
-        fontSize: 20
+    triangle: {
+        height: '10%',
+        width: '30%', top: '10%',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
