@@ -67,7 +67,7 @@ export default class input extends Component {
                                 }
                             }}>
 
-                        {this.state.emoji!=''&&<Text style={[styles.emoji, {fontSize: 210}]}
+                        {this.state.emoji!=''&&<Text style={styles.emoji}
                                                      onPress={() => {
                                                               const { navigate } = this.props.navigation;
                                                               navigate('Compass', { emoji: this.state.emoji, backgroundColor: this.props.navigation.state.params.backgroundColor, fontColor: this.props.navigation.state.params.fontColor})
@@ -117,8 +117,7 @@ const styles = StyleSheet.create({
     emoji: {
         marginTop: '-6%',
         marginLeft: '6%',
-        width: '100%',
-        height: 250,
+        fontSize: 210,
         textAlign: 'center'
     },
     triangle: {
