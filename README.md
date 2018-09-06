@@ -13,6 +13,6 @@ https://expo.io/@nick2018/emoji-compass
 <img src='./public/img/sample1.png'/>
 
 ## Key Featrues
-. Variety choice of emoji library
-. Funny emoji compass
-. Day/Night different background scene
+(1). Variety choice of emoji library<br/>
+(2). Funny emoji compass<br/>
+(3). Day/Night different background scene<br/>
