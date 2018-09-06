@@ -1,7 +1,14 @@
 {
   "expo": {
-    "name": "emoji-compass",
-    "sdkVersion": "27.0.0",
-    "orientation": "portrait"
+   "name": "emoji-compass",
+   "icon": "./public/img/icon.png",
+   "version": "1.0.0",
+   "privacy": "public",
+   "slug": "emoji-compass",
+   "sdkVersion": "27.0.0",
+   "orientation": "portrait",
+   "ios": {
+     "bundleIdentifier": "com.mrchenalliance.emoji-compass"
+   }
   }
 }
