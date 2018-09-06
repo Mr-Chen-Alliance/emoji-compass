@@ -7,4 +7,4 @@ Always have an idea to use emoji as the object & point to the right directionðŸ˜
 A simple react-native compass app
 
 ## Interface Sample
-<img src='./public/img/sample.png'/>
+<img src='./public/img/sample1.png'/>
