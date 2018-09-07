@@ -9,7 +9,7 @@ A simple react-native compass app
 ## Deploy link
 https://expo.io/@nick2018/emoji-compass
 
-(Click the link above & get to the page, then type your email to request a temporary link on the right side of the apge)<br/>
+(Click the link above & get to the page, then type your email to request a temporary link on the right side of the page)<br/>
 I know it's so weird, but that's how expo do...
 
 
