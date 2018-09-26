@@ -12,6 +12,11 @@ https://expo.io/@nick2018/emoji-compass
 (Click the link above & get to the page, then type your email to request a temporary link on the right side of the page)<br/>
 I know it's so weird, but that's how expo do... Otherwise, you can just take a look at my intro video below for a quick glance of this project😊
 
+## Intro Video
+<a href='https://www.youtube.com/watch?v=oapgs4yOKjc' target='_blank'>
+  <img>
+</a>
+
 
 ## Interface Sample
 <img src='./public/img/sample1.png'/>
