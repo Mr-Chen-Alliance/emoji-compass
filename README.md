@@ -1,7 +1,7 @@
 # <img src='./public/img/logo.png' width='240'/>
 
 ## Why Create
-Always have an idea to use emoji as the object & point to the right direction😆
+Have your ever feel that you are tired of staring at the rigid old school compass pattern? Here you got Emoji-Compass as the second choice! It is a mobile compass app with a simplfied design. All we show you is what you need at a glance.😆
 
 ## Description
 A simple react-native compass app
