@@ -14,7 +14,7 @@ I know it's so weird, but that's how expo do... Otherwise, you can just take a l
 
 ## Intro Video
 <a href='https://www.youtube.com/watch?v=oapgs4yOKjc' target='_blank'>
-  <img>
+  <img src='./public/img/1.png'/>
 </a>
 
 
